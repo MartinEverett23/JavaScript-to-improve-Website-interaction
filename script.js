@@ -1,41 +1,78 @@
 
 const taskInput = document.getElementById("taskInput");
-const addTaskBtn = document.getElementById("addTaskBtn");
+const addBtn = document.getElementById("addBtn");
 const taskList = document.getElementById("taskList");
-const errorMsg = document.getElementById("errorMsg");
 
-addTaskBtn.addEventListener("click", addTask);
+addBtn.addEventListener("click", addTask);
 
 function addTask() {
     const taskText = taskInput.value.trim();
 
     if (taskText === "") {
-        errorMsg.style.display = "block";
+        alert("Please enter a valid task.");
         return;
     }
 
-    errorMsg.style.display = "none";
+    const li = document.createElement("li");
+    li.className = "task-item";
 
-    // Create task card
-    const taskCard = document.createElement("div");
-    taskCard.classList.add("card");
+    const span = document.createElement("span");
+    span.textContent = taskText;
 
-    const taskContent = document.createElement("p");
-    taskContent.textContent = taskText;
+    const btnContainer = document.createElement("div");
+    btnContainer.className = "task-buttons";
+
+    const editBtn = document.createElement("button");
+    editBtn.textContent = "Edit";
+    editBtn.className = "edit-btn";
+    editBtn.onclick = () => editTask(span, editBtn);
 
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Delete";
-    deleteBtn.style.background = "#ff6b00";
-    deleteBtn.style.marginTop = "10px";
+    deleteBtn.className = "delete-btn";
+    deleteBtn.onclick = () => li.remove();
 
-    deleteBtn.addEventListener("click", () => {
-        taskCard.remove();
-    });
+    btnContainer.appendChild(editBtn);
+    btnContainer.appendChild(deleteBtn);
 
-    taskCard.appendChild(taskContent);
-    taskCard.appendChild(deleteBtn);
+    li.appendChild(span);
+    li.appendChild(btnContainer);
 
-    taskList.appendChild(taskCard);
+    taskList.appendChild(li);
 
     taskInput.value = "";
+}
+
+function editTask(span, editBtn) {
+    const currentText = span.textContent;
+
+    const input = document.createElement("input");
+    input.type = "text";
+    input.value = currentText;
+
+    span.replaceWith(input);
+
+    editBtn.textContent = "Save";
+    editBtn.className = "save-btn";
+
+    editBtn.onclick = () => saveTask(input, editBtn);
+}
+
+function saveTask(input, editBtn) {
+    const newText = input.value.trim();
+
+    if (newText === "") {
+        alert("Task cannot be empty.");
+        return;
+    }
+
+    const span = document.createElement("span");
+    span.textContent = newText;
+
+    input.replaceWith(span);
+
+    editBtn.textContent = "Edit";
+    editBtn.className = "edit-btn";
+
+    editBtn.onclick = () => editTask(span, editBtn);
 }
