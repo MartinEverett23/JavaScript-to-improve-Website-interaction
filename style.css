@@ -1,5 +1,4 @@
 
-
 :root {
     --main-bg: #f5f1e8;
     --accent: #6b4f2d;
@@ -11,14 +10,45 @@
 body {
     background: #f5f5f5;
     color: var(--dark);
+    font-family: Arial, sans-serif;
+    margin: 0;
 }
 
 header {
     background: #ff6b00;
     color: var(--main-bg);
+    padding: 20px;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: var(--main-bg);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.container {
+    width: 80%;
+    margin: 30px auto;
+    display: grid;
+    gap: 20px;
 }
 
 .card {
+    background: var(--light);
+    padding: 20px;
+    border-radius: var(--radius);
     border-left: 5px solid var(--accent);
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
@@ -26,7 +56,6 @@ header {
 .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-    cursor: pointer;
 }
 
 h2::after {
@@ -38,30 +67,59 @@ h2::after {
     margin-top: 5px;
 }
 
-h2 {
-    display: inline-block;
-    padding-bottom: 2px;   
-}
-
-
-.small-image {
-    width: 25%;
-    height: auto;
+input {
+    width: 80%;
+    padding: 10px;
     border-radius: var(--radius);
+    border: 1px solid var(--accent);
+    margin-right: 10px;
 }
 
 .form-button {
-    display: inline-block;
     background-color: #6b3e26;
     color: white;
-    padding: 12px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 16px;
-    margin: 10px 5px;
+    padding: 10px 18px;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 .form-button:hover {
     background-color: #8a5638;
+}
+
+.task-list {
+    list-style: none;
+    padding: 0;
+}
+
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--main-bg);
+    padding: 10px;
+    border-radius: var(--radius);
+    margin-bottom: 10px;
+}
+
+.task-buttons button {
+    margin-left: 10px;
+    padding: 6px 10px;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+}
+
+.edit-btn {
+    background: #ffb347;
+}
+
+.delete-btn {
+    background: #ff6b6b;
+}
+
+.save-btn {
+    background: #6bbf59;
 }
